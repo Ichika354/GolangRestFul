@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "api/your_function_name": {
+        "handler": "api/apigolang"
+      }
+    }
+  }
+  
