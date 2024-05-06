@@ -196,28 +196,25 @@ func getProducts(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func createProduct(db *sql.DB, w http.ResponseWriter, r *http.Request) {
-	var p Product
-	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+    var p Product
+    if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
 
-	result, err := db.Exec("INSERT INTO bookings (name, phone_number,amount) VALUES (?, ?,?)", p.Name, p.NumberPhone,p.Amount)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+    var id int
+    err := db.QueryRow("INSERT INTO bookings (name, phone_number, amount) VALUES ($1, $2, $3) RETURNING id", p.Name, p.NumberPhone, p.Amount).Scan(&id)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 
-	id, err := result.LastInsertId()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	p.ID = int(id)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(p)
+    p.ID = id
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(p)
 }
+
+
 
 func updateProduct(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var p Product
@@ -226,7 +223,7 @@ func updateProduct(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if _, err := db.Exec("UPDATE bookings SET name = ?, phone_number = ?, amount = ?  WHERE id = ?", p.Name, p.NumberPhone,p.Amount ,p.ID); err != nil {
+	if _, err := db.Exec("UPDATE bookings SET name = $1, phone_number = $2, amount = $3 WHERE id = $4", p.Name, p.NumberPhone, p.Amount, p.ID); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -242,10 +239,11 @@ func deleteProduct(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if _, err := db.Exec("DELETE FROM bookings WHERE id = ?", id); err != nil {
+	if _, err := db.Exec("DELETE FROM bookings WHERE id = $1", id); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusNoContent)
 }
+
