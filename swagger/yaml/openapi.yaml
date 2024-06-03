@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: ProductGolang
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /login:
+    post:
+      tags:
+        - default
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                npm: 714220008
+                password: admin12345
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin-category:
+    get:
+      tags:
+        - default
+      summary: GetAdminCategory
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - default
+      summary: PostAdminCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                category: Sport
+                icon: fa-solid fa-sport
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin-category/16:
+    put:
+      tags:
+        - default
+      summary: PutAdminCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                category: Sports
+                icon: fa-solid fa-sport
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - default
+      summary: DeleteAdminCategory
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "bb58c540-9d5a-479e-932c-92384476bb04",
+		"name": "ProductGolang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23649954"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"npm\" : 714220008,\r\n  \"password\" : \"admin12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAdminCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin-category",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAdminCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOjcxNDIyMDAwOCwiZXhwIjoxNzE3MTc4MDI2fQ.IA_ondKltn1yn6U54KlywIGuuZ241ZJrED-ZYlzXQRQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\" : \"Sport\",\r\n    \"icon\" : \"fa-solid fa-sport\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin-category",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAdminCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOjcxNDIyMDAwOCwiZXhwIjoxNzE3MTc4MDI2fQ.IA_ondKltn1yn6U54KlywIGuuZ241ZJrED-ZYlzXQRQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\" : \"Sports\",\r\n    \"icon\" : \"fa-solid fa-sport\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin-category/16",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin-category",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAdminCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOjcxNDIyMDAwOCwiZXhwIjoxNzE3MTc4MzA4fQ.GqCww5tYkdXLc7lqe-lVyFROdbEcNMYCNdpntGSJn2I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin-category/16",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin-category",
+						"16"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
